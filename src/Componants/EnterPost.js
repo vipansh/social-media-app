@@ -49,6 +49,7 @@ export const EnterPost = () => {
         );
         setCaption(null)
         setImage(null)
+        setProgress(0)
     };
 
 
@@ -65,8 +66,8 @@ export const EnterPost = () => {
     return (
         <div className="enter-post-container">
             <label>Write Caption</label>  <input type="text" value={caption} onChange={(e) => { setCaption(e.target.value) }} />
-            <input type="file" onChange={handelChange} />
-            <button onClick={postThis}>post</button>
+            <input type="file" onChange={handelChange} className="custom-file-input" />
+            <button onClick={postThis} className="btn-primary">post</button>
             {progress > 0 ? <progress value={progress} max="100" /> : ""}
         </div>
     )

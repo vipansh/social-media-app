@@ -5,12 +5,21 @@ import { AuthContext } from '../Contaxts/AuthContext';
 import { firestore, storage } from '../Firebase/Fire';
 import { AddComment } from './AddComment';
 import { Comments } from './Comments';
-
+import { RiDeleteBin5Line } from 'react-icons/ri';
 export const InPost = ({ data }) => {
 
     const [canDelete, setcanDelete] = useState(false)
     const { currentUser } = useContext(AuthContext);
-    console.log(data.post)
+
+    useEffect(() => {
+        if (currentUser.email === data.post.user) {
+            setcanDelete(true)
+        }
+        else {
+            setcanDelete(false)
+        }
+    }, [])
+
 
     const deletePost = () => {
 
@@ -45,7 +54,7 @@ export const InPost = ({ data }) => {
     return (
         <div className="post-container">
 
-            <p>{data.post.user} <button onClick={deletePost}>delete post</button></p>
+            <p>{data.post.user.replace("@gmail.com", "")} {canDelete ? <button onClick={deletePost} className=" btn-promary dlt-btn" ><RiDeleteBin5Line className="dlt-icon" /></button> : ""} </p>
             <p>{data.post.caption}</p>
             <img src={data.post.postimgUrl} alt="img" style={{ height: "50px" }} />
             <AddComment id={data.id} comments={data.post.comments} />

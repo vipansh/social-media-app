@@ -20,7 +20,7 @@ export const AddComment = ({ id, comments }) => {
     return (
         <div>
             <input type="text" value={commentText} onChange={(e) => { setCommentText(e.target.value) }} />
-            <button onClick={updateComment}>comment</button>
+            <button onClick={updateComment} className="btn-primary">comment</button>
         </div>
     )
 }
