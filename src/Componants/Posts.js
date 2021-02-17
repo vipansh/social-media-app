@@ -1,40 +1,34 @@
 import React from 'react'
 import { useState, useEffect, useContext } from 'react'
 import { AuthContext } from '../Contaxts/AuthContext';
-import fireDb from '../Firebase/Fire';
+import { firestore } from '../Firebase/Fire';
+import { InPost } from './InPost';
 
 
 
 
 export const Posts = () => {
-    const [list, setList] = useState()
+    const [feed, setfeed] = useState([])
 
     const { currentUser } = useContext(AuthContext);
 
 
     useEffect(() => {
-        const listRef = fireDb.database().ref('postList').child("allPost");
-        listRef.on('value', (snapshot) => {
-            const listValues = snapshot.val();
-
-            const listarray = [];
-            for (let id in listValues) {
-
-                listarray.push(listValues[id]);
-            }
-            setList(listarray);
-        });
-
-
-        console.log(list)
+        firestore.collection("posts").onSnapshot((snapshot) => {
+            setfeed(snapshot.docs.map(doc => ({
+                id: doc.id, post: doc.data()
+            })))
+        })
+        console.log(feed)
 
 
     }, []);
 
+    console.log(feed)
     return (
         <div>
-            {list
-                ? list.map((todo, index) => <div>{todo}</div>)
+            {feed
+                ? feed.map((data, index) => <div><InPost data={data} key={index} /> </div>)
                 : 'nothing'}
         </div>
     )

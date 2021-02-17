@@ -12,7 +12,7 @@ export const HomePage = () => {
     if (currentUser) {
 
         return (
-            <div>
+            <div className="home-container">
                 <Welcome />
                 <EnterPost />
                 <Posts />

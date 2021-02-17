@@ -2,6 +2,12 @@ import React, { useState, useCallback, useContext } from 'react'
 import { ErrorLogIn } from '../Componants/ErrorLogIn'
 import { AuthContext } from '../Contaxts/AuthContext'
 import { auth } from '../Firebase/Fire'
+import { FaUser } from 'react-icons/fa';
+import { BsFillEyeFill } from 'react-icons/bs';
+import { BsFillEyeSlashFill } from 'react-icons/bs';
+import { IoMdUnlock } from 'react-icons/io';
+
+
 
 import signin from '../img/signin.svg'
 import signup from '../img/signup.svg'
@@ -13,6 +19,7 @@ export const LogIn = () => {
 
 const [errorMsg, setErrorMsg] = useState('')
 const [isError, setisError] = useState(false)
+const [passwordShown, setPasswordShown] = useState(false)
 
     const handelNewUser = useCallback(async event => {
         event.preventDefault();
@@ -58,12 +65,13 @@ console.log(currentUser)
                     <form action="/" className="sign-in-form" onSubmit={handelLogIn} >
                         <h2 className="title">Sign in</h2>
                         <div className="input-field">
-                            <i className="fas fa-user"></i>
+                            <span className="user-icon fas fa-user" ><FaUser/> </span>
                             <input type="email" placeholder="Email" name="email" />
                         </div>
-                        <div className="input-field">
-                            <i className="fas fa-lock"></i>
-                            <input type="password" placeholder="Password" name="password" autoComplete="on" />
+                        <div className="input-field  input-field-password">
+                            <i className="fas fa-lock"><IoMdUnlock/></i>
+                            <input type={passwordShown ? "text" : "password"} placeholder="Password" name="password" autoComplete="on" />
+                             <span className="password-show" onClick={()=>{setPasswordShown(!passwordShown)}}>{passwordShown?<BsFillEyeFill/>:<BsFillEyeSlashFill/>}</span>
                         </div>
                         <input type="submit" value="Login" className="btn solid" />
                         <p className="social-text">Or Sign in with social platforms</p>
@@ -90,9 +98,10 @@ console.log(currentUser)
                             <i className="fas fa-envelope"></i>
                             <input type="email" placeholder="Email" name="email" />
                         </div>
-                        <div className="input-field">
+                        <div className="input-field input-field-password">
                             <i className="fas fa-lock"></i>
-                            <input type="password" placeholder="Password" name="password" autoComplete="on"/>
+                            <input type={passwordShown ? "text" : "password"} placeholder="Password" name="password" autoComplete="on"/>
+                            <span className="password-show" onClick={()=>{setPasswordShown(!passwordShown)}}>show</span>
                         </div>
                         <input type="submit" className="btn" value="Sign up" />
                         <p className="social-text">Or Sign up with social platforms</p>

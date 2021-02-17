@@ -78,7 +78,20 @@ form.sign-in-form {
   padding: 0 0.4rem;
   position: relative;
 }
+.input-field-password {
+  grid-template-columns: 15% 75% 15%;
+}
 
+.password-show {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+.user-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
 .input-field i {
   text-align: center;
   line-height: 55px;

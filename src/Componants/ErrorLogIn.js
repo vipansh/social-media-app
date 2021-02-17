@@ -1,6 +1,6 @@
 import React from 'react'
 import "../styles/Error.css"
-export const ErrorLogIn = ({ isError, message }) => {
+export const ErrorLogIn = ({ isError, message  }) => {
 
 
 
