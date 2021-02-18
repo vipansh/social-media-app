@@ -137,3 +137,32 @@
 .post-caption {
   margin-top: 1rem;
 }
+
+.like-btn {
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 1px solid #a3d4f2;
+  border-radius: 0.6rem;
+  color: rgba(70, 70, 253, 0.157);
+  cursor: pointer;
+  align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  padding: 0.2rem 0.5rem;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  color: #292f33;
+  margin: 0.2rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .post-container {
+    padding: 0.5rem;
+  }
+  .post-img {
+    height: 250px;
+  }
+}

@@ -7,7 +7,6 @@ import { LogIn } from './LogIn'
 
 export const HomePage = () => {
     const { currentUser } = useContext(AuthContext);
-    console.log(currentUser)
 
     if (currentUser) {
 

@@ -68,3 +68,13 @@
   outline: none;
   margin: 0 0 0 2rem;
 }
+
+@media only screen and (max-width: 600px) {
+  .post-main-container {
+    width: 100%;
+    padding: 0;
+  }
+  .home-container {
+    width: 98%;
+  }
+}

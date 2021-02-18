@@ -19,7 +19,6 @@ export const Posts = () => {
                 id: doc.id, post: doc.data()
             })))
         })
-        console.log(feed)
 
 
     }, []);

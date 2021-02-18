@@ -1,7 +1,6 @@
 import React from 'react'
 
-export const Comments = ({ comments }) => {
-    console.log(comments)
+export const Comments = ({ comments  }) => {
     return (
         <div>
             {comments ? comments.map((data) => {

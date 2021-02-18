@@ -21,42 +21,63 @@ export const EnterPost = () => {
     const postThis = () => {
         setDisableBtn(true)
         let imageName = makeid(10)
-        const uploadTask = storage.ref(`images/${imageName}`).put(image);
-        uploadTask.on(
-            "state_changed",
-            snapshot => {
-                const progress = Math.round(
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                );
-                setProgress(progress);
-            },
-            error => {
-                setProgress(0)
-                console.log(error);
-            },
-            () => {
-                storage
-                    .ref("images")
-                    .child(imageName)
-                    .getDownloadURL()
-                    .then(url => {
-                        firestore.collection("posts").add({
-                            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                            caption: caption,
-                            user: currentUser.email,
-                            postimgUrl: url,
 
-                        })
+        if (image) {
 
-                        setCaption("")
-                        setImage(null)
-                        setProgress(0)
-                        setDisableBtn(false)
+            const uploadTask = storage.ref(`images/${imageName}`).put(image);
+            uploadTask.on(
+                "state_changed",
+                snapshot => {
+                    const progress = Math.round(
+                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    );
+                    setProgress(progress);
+                },
+                error => {
+                    setProgress(0)
+                    console.log(error);
+                },
 
-                    });
-            }
 
-        );
+                () => {
+                    storage
+                        .ref("images")
+                        .child(imageName)
+                        .getDownloadURL()
+                        .then(url => {
+                            firestore.collection("posts").add({
+                                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                                caption: caption,
+                                user: currentUser.email,
+                                postimgUrl: url,
+
+                            })
+
+                            setCaption("")
+                            setImage(null)
+                            setProgress(0)
+                            setDisableBtn(false)
+
+                        });
+                }
+            );
+        }
+        else {
+
+            firestore.collection("posts").add({
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                caption: caption,
+                user: currentUser.email,
+
+            })
+
+            setCaption("")
+            setImage(null)
+            setProgress(0)
+            setDisableBtn(false)
+
+
+        }
     };
 
 

@@ -6,12 +6,18 @@ import { firestore, storage } from '../Firebase/Fire';
 import { AddComment } from './AddComment';
 import { Comments } from './Comments';
 import { RiDeleteBin5Line } from 'react-icons/ri';
+import { GiNestedHearts } from "react-icons/gi"
+import { FaRegCommentDots } from "react-icons/fa"
+import { FcLike } from "react-icons/fc"
+
+
 export const InPost = ({ data }) => {
 
+    const { currentUser } = useContext(AuthContext);
     const [canDelete, setcanDelete] = useState(false)
     const [openComment, setOpenComment] = useState(false)
-
-    const { currentUser } = useContext(AuthContext);
+    const [hasLiked, setHasLiked] = useState(data.post.like ? data.post.like.includes(currentUser.uid) : false)
+    const [alreadyLike, setAlreadyLike] = useState(data.post.like ? data.post.like : [])
 
     useEffect(() => {
         if (currentUser.email === data.post.user) {
@@ -21,22 +27,25 @@ export const InPost = ({ data }) => {
             setcanDelete(false)
         }
 
+
     }, [])
 
 
     const deletePost = () => {
+        if (data.post.postimgUrl) {
 
-        let imgRef = storage.refFromURL(data.post.postimgUrl)
-        imgRef
-            .delete()
-            .then(function () {
-                console.log("deletePost")
-            })
-            .catch(function (error) {
-                console.log(error)
+            let imgRef = storage.refFromURL(data.post.postimgUrl)
+            imgRef
+                .delete()
+                .then(function () {
+                    console.log("deletePost")
+                })
+                .catch(function (error) {
+                    console.log(error)
 
-            });
+                });
 
+        }
         // delete from storage
 
         let storageRef = firestore.collection("posts").doc(data.id)
@@ -54,6 +63,28 @@ export const InPost = ({ data }) => {
     }
 
 
+    const sendLike = () => {
+        setHasLiked(!hasLiked)
+        if (hasLiked) {
+            let newarray = alreadyLike.filter(data => (data !== currentUser.uid))
+
+            setAlreadyLike(newarray)
+            firestore.collection("posts").doc(data.id).update({
+                like: newarray
+            })
+        }
+
+        else {
+            let newarray = [...alreadyLike, currentUser.uid]
+
+            setAlreadyLike(newarray)
+            firestore.collection("posts").doc(data.id).update({
+                like: newarray
+            })
+
+        }
+    }
+
     return (
         <div className="post-container">
 
@@ -64,12 +95,14 @@ export const InPost = ({ data }) => {
             </div>
 
             <div className="post-comment">
-                <span onClick={() => { setOpenComment(!openComment) }}>Add comment</span>
+                <span className="like-btn" onClick={() => { sendLike() }}>
+                    {!hasLiked ? <GiNestedHearts /> : <FcLike />} {alreadyLike.length} </span>
+                <span className="like-btn" onClick={() => { setOpenComment(!openComment) }}><FaRegCommentDots /></span>
                 {openComment ?
-                    <div className="post-comment-container" ><AddComment id={data.id} comments={data.post.comments} />  <span onClick={() => { setOpenComment(!openComment) }}>❌</span></div>
+                    <div className="post-comment-container" ><AddComment id={data.id} comments={data.post.comments} setOpenComment={setOpenComment} />  <span onClick={() => { setOpenComment(!openComment) }}>❌</span></div>
                     : ""}
                 <Comments comments={data.post.comments} />
             </div>
-        </div>
+        </div >
     )
 }
