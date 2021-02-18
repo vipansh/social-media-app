@@ -101,7 +101,7 @@ console.log(currentUser)
                         <div className="input-field input-field-password">
                             <i className="fas fa-lock"></i>
                             <input type={passwordShown ? "text" : "password"} placeholder="Password" name="password" autoComplete="on"/>
-                            <span className="password-show" onClick={()=>{setPasswordShown(!passwordShown)}}>show</span>
+                            <span className="password-show" onClick={()=>{setPasswordShown(!passwordShown)}}>{passwordShown?<BsFillEyeFill/>:<BsFillEyeSlashFill/>}</span>
                         </div>
                         <input type="submit" className="btn" value="Sign up" />
                         <p className="social-text">Or Sign up with social platforms</p>

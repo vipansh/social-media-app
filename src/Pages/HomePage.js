@@ -14,8 +14,10 @@ export const HomePage = () => {
         return (
             <div className="home-container">
                 <Welcome />
-                <EnterPost />
-                <Posts />
+                <div className="post-main-container">
+                    <EnterPost />
+                    <Posts />
+                </div>
             </div>
         )
     }

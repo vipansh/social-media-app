@@ -1,0 +1,139 @@
+.custom-file-input input[type="file"] {
+  display: none;
+}
+
+.messageBox {
+  width: 93%;
+  padding: 5px;
+  resize: none;
+  height: 60px;
+  color: #292f33;
+  display: block;
+  font-size: 13px;
+  font-weight: 200;
+  margin: 10px auto;
+  border-radius: 3px;
+  border: 1px solid #a3d4f2;
+}
+.messageBox:focus {
+  outline: none;
+}
+.custom-file-input {
+  margin: 0.2rem auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.img-in-post {
+  margin: 0 auto;
+  max-width: 93%;
+}
+
+.img-in-post-img {
+  max-width: 100%;
+  margin: 0 auto;
+  max-height: 400px;
+}
+.upload-img-icon {
+  display: inline-flex;
+  font-size: 1.25rem;
+  margin: auto auto;
+}
+
+.upload-img-label {
+  display: flex;
+  align-items: center;
+  justify-self: start;
+  border: 2px solid #a3d4f2;
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  border-radius: 0.6rem;
+
+  margin: 20px;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.post-btn {
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #a3d4f2;
+  border-radius: 0.6rem;
+  color: rgba(70, 70, 253, 0.157);
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  margin: 20px;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  color: #292f33;
+}
+
+.btn-first {
+  transition: box-shadow 1000ms ease-in-out, color 300ms ease-in-out;
+}
+.btn-first:hover {
+  box-shadow: 0 0 40px 40px rgba(70, 70, 253, 0.157) inset;
+  color: #142129;
+  font-weight: 700;
+}
+
+.messageBox-label {
+  display: block;
+  width: 93%;
+  margin: 0 auto;
+  padding: 0.8rem 0rem;
+}
+
+.post-container {
+  border: 2px solid #a3d4f2;
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-user {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-comment {
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.post-container-img {
+  display: flex;
+  flex-direction: column;
+}
+
+.feed-main-container {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.post-comment-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-user {
+  font-size: 1.25rem;
+}
+
+.post-caption {
+  margin-top: 1rem;
+}

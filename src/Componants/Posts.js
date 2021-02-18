@@ -24,9 +24,9 @@ export const Posts = () => {
 
     }, []);
 
-    console.log(feed)
     return (
-        <div>
+
+        <div className="feed-main-container">
             {feed
                 ? feed.map((data, index) => <div><InPost data={data} key={index} /> </div>)
                 : 'nothing'}

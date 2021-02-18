@@ -9,6 +9,8 @@ import { RiDeleteBin5Line } from 'react-icons/ri';
 export const InPost = ({ data }) => {
 
     const [canDelete, setcanDelete] = useState(false)
+    const [openComment, setOpenComment] = useState(false)
+
     const { currentUser } = useContext(AuthContext);
 
     useEffect(() => {
@@ -18,6 +20,7 @@ export const InPost = ({ data }) => {
         else {
             setcanDelete(false)
         }
+
     }, [])
 
 
@@ -54,11 +57,19 @@ export const InPost = ({ data }) => {
     return (
         <div className="post-container">
 
-            <p>{data.post.user.replace("@gmail.com", "")} {canDelete ? <button onClick={deletePost} className=" btn-promary dlt-btn" ><RiDeleteBin5Line className="dlt-icon" /></button> : ""} </p>
-            <p>{data.post.caption}</p>
-            <img src={data.post.postimgUrl} alt="img" style={{ height: "50px" }} />
-            <AddComment id={data.id} comments={data.post.comments} />
-            <Comments comments={data.post.comments} />
+            <div className="post-user">{data.post.user.replace("@gmail.com", "")} {canDelete ? <button onClick={deletePost} className=" btn-promary dlt-btn" ><RiDeleteBin5Line className="dlt-icon" /></button> : ""} </div>
+            <div className="post-container-img">
+                {data.post.postimgUrl ? <img src={data.post.postimgUrl} alt="img" className="post-img" /> : ""}
+                <p className="post-caption">{data.post.caption}</p>
+            </div>
+
+            <div className="post-comment">
+                <span onClick={() => { setOpenComment(!openComment) }}>Add comment</span>
+                {openComment ?
+                    <div className="post-comment-container" ><AddComment id={data.id} comments={data.post.comments} />  <span onClick={() => { setOpenComment(!openComment) }}>❌</span></div>
+                    : ""}
+                <Comments comments={data.post.comments} />
+            </div>
         </div>
     )
 }

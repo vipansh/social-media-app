@@ -3,19 +3,23 @@ import { AuthContext } from '../Contaxts/AuthContext';
 import { storage } from '../Firebase/Fire'
 import { firestore } from '../Firebase/Fire'
 import firebase from 'firebase'
+import { FcAddImage } from 'react-icons/fc';
+import { FaPencilAlt } from 'react-icons/fa';
+
 
 import makeid from './MakeId';
+import "../styles/post.css"
 
 export const EnterPost = () => {
     const { currentUser } = useContext(AuthContext);
     const [caption, setCaption] = useState()
     const [image, setImage] = useState(null)
     const [progress, setProgress] = useState(0)
-
+    const [disableBtn, setDisableBtn] = useState(false)
 
 
     const postThis = () => {
-
+        setDisableBtn(true)
         let imageName = makeid(10)
         const uploadTask = storage.ref(`images/${imageName}`).put(image);
         uploadTask.on(
@@ -27,6 +31,7 @@ export const EnterPost = () => {
                 setProgress(progress);
             },
             error => {
+                setProgress(0)
                 console.log(error);
             },
             () => {
@@ -43,13 +48,15 @@ export const EnterPost = () => {
 
                         })
 
+                        setCaption("")
+                        setImage(null)
+                        setProgress(0)
+                        setDisableBtn(false)
 
                     });
             }
+
         );
-        setCaption(null)
-        setImage(null)
-        setProgress(0)
     };
 
 
@@ -64,11 +71,23 @@ export const EnterPost = () => {
     }
 
     return (
+
         <div className="enter-post-container">
-            <label>Write Caption</label>  <input type="text" value={caption} onChange={(e) => { setCaption(e.target.value) }} />
-            <input type="file" onChange={handelChange} className="custom-file-input" />
-            <button onClick={postThis} className="btn-primary">post</button>
-            {progress > 0 ? <progress value={progress} max="100" /> : ""}
+            <label className="messageBox-label">Write Caption<FaPencilAlt style={{ marginLeft: "5px" }} /></label>
+            <textarea type="text" className="messageBox" value={caption} onChange={(e) => { setCaption(e.target.value) }} />
+
+            {image ? <div className="img-in-post"><img src={URL.createObjectURL(image)} className="img-in-post-img" alt="img" /></div> : ""}
+            <div className="custom-file-input">
+
+                <label for="imgfile" className="upload-img-label btn-first">upload Img <span className="upload-img-icon"><FcAddImage className="upload-img-icon" style={{ marginLeft: "5px" }} /></span></label>
+                <input id="imgfile" type="file" onChange={handelChange} />
+                <button onClick={postThis} className="post-btn btn-first"
+                    disabled={disableBtn}
+                >{disableBtn ? "posting..." : "post"}</button>
+            </div>
+
+
+
         </div>
     )
 }

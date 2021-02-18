@@ -6,7 +6,7 @@ export const Comments = ({ comments }) => {
         <div>
             {comments ? comments.map((data) => {
                 return (<div>
-                    <p>{data.comment}  <span>by-{data.user}</span></p>
+                    <p>{data.comment}  <span style={{ fontWeight:"500" }}>by-{data.user}</span></p>
 
                 </div>)
             }
