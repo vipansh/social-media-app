@@ -265,6 +265,18 @@ form.sign-in-form {
   pointer-events: all;
 }
 
+.btn {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 16px;
+  background-color: #04befe;
+}
+.btn:hover {
+  opacity: 0.8;
+}
 @media (max-width: 870px) {
   .container {
     min-height: 800px;
