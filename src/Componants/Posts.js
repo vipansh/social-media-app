@@ -15,13 +15,19 @@ export const Posts = () => {
 
     useEffect(() => {
         firestore.collection("posts").onSnapshot((snapshot) => {
-            setfeed(snapshot.docs.map(doc => ({
+            let allpost = (snapshot.docs.map(doc => ({
                 id: doc.id, post: doc.data()
             })))
+            console.log(allpost)
+
+            allpost.sort((a, b) => { return a.post.timestamp - b.post.timestamp })
+
+            setfeed(allpost)
         })
 
 
     }, []);
+    console.log(feed)
 
     return (
 

@@ -18,7 +18,7 @@ export const InPost = ({ data }) => {
     const [openComment, setOpenComment] = useState(false)
     const [hasLiked, setHasLiked] = useState(data.post.like ? data.post.like.includes(currentUser.uid) : false)
     const [alreadyLike, setAlreadyLike] = useState(data.post.like ? data.post.like : [])
-
+    
     useEffect(() => {
         if (currentUser.email === data.post.user) {
             setcanDelete(true)
@@ -26,10 +26,9 @@ export const InPost = ({ data }) => {
         else {
             setcanDelete(false)
         }
-
+        console.log(data)
 
     }, [])
-
 
     const deletePost = () => {
         if (data.post.postimgUrl) {
