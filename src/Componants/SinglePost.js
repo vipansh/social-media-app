@@ -28,7 +28,7 @@ export const SinglePost = ({ data }) => {
             setcanDelete(false)
         }
 
-    }, [])
+    }, [currentUser.email, data])
 
     const deletePost = () => {
         if (data.post.postimgUrl) {
