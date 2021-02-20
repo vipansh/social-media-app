@@ -9,6 +9,7 @@ import { FaPencilAlt } from 'react-icons/fa';
 
 import makeid from './MakeId';
 import "../styles/post.css"
+import { ErrorLogIn } from './ErrorLogIn';
 
 export const EnterPost = () => {
     const { currentUser } = useContext(AuthContext);
@@ -17,68 +18,82 @@ export const EnterPost = () => {
     const [progress, setProgress] = useState(0)
     const [disableBtn, setDisableBtn] = useState(false)
 
+    const [iserror, setIserror] = useState(false)
+    const [errorMsg, setErrorMsg] = useState("")
+
 
     const postThis = () => {
-        setDisableBtn(true)
-        let imageName = makeid(10)
 
-        if (image) {
-
-            const uploadTask = storage.ref(`images/${imageName}`).put(image);
-            uploadTask.on(
-                "state_changed",
-                snapshot => {
-                    const progress = Math.round(
-                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                    );
-                    setProgress(progress);
-                },
-                error => {
-                    setProgress(0)
-                    console.log(error);
-                },
+        if (caption) {
 
 
-                () => {
-                    storage
-                        .ref("images")
-                        .child(imageName)
-                        .getDownloadURL()
-                        .then(url => {
-                            firestore.collection("posts").add({
-                                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                                caption: caption,
-                                user: currentUser.email,
-                                postimgUrl: url,
+            setDisableBtn(true)
+            let imageName = makeid(10)
 
-                            })
+            if (image) {
 
-                            setCaption("")
-                            setImage(null)
-                            setProgress(0)
-                            setDisableBtn(false)
+                const uploadTask = storage.ref(`images/${imageName}`).put(image);
+                uploadTask.on(
+                    "state_changed",
+                    snapshot => {
+                        const progress = Math.round(
+                            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                        );
+                        setProgress(progress);
+                    },
+                    error => {
+                        setProgress(0)
+                        console.log(error);
+                    },
 
-                        });
-                }
-            );
+
+                    () => {
+                        storage
+                            .ref("images")
+                            .child(imageName)
+                            .getDownloadURL()
+                            .then(url => {
+                                firestore.collection("posts").add({
+                                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                                    caption: caption,
+                                    user: currentUser.email,
+                                    postimgUrl: url,
+
+                                })
+
+                                setCaption("")
+                                setImage(null)
+                                setProgress(0)
+                                setDisableBtn(false)
+
+                            });
+                    }
+                );
+            }
+            else {
+
+                firestore.collection("posts").add({
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    caption: caption,
+                    user: currentUser.email,
+
+                })
+
+                setCaption("")
+                setImage(null)
+                setProgress(0)
+                setDisableBtn(false)
+
+
+            }
         }
         else {
-
-            firestore.collection("posts").add({
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                caption: caption,
-                user: currentUser.email,
-
-            })
-
-            setCaption("")
-            setImage(null)
-            setProgress(0)
-            setDisableBtn(false)
-
-
+            setErrorMsg("Enter Caption")
+            setIserror(true)
+            setTimeout(() => setIserror(false), 4000);
         }
-    };
+
+    }
 
 
 
@@ -94,6 +109,8 @@ export const EnterPost = () => {
     return (
 
         <div className="enter-post-container">
+            <ErrorLogIn isError={iserror} message={errorMsg} />
+
             <label className="messageBox-label">Write Caption<FaPencilAlt style={{ marginLeft: "5px" }} /></label>
             <textarea type="text" className="messageBox" value={caption} onChange={(e) => { setCaption(e.target.value) }} />
 
