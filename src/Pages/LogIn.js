@@ -15,6 +15,7 @@ import signup from '../img/signup.svg'
 import '../styles/logIn.css'
 
 
+
 export const LogIn = () => {
 
 const [errorMsg, setErrorMsg] = useState('')
@@ -52,7 +53,6 @@ const [passwordShown, setPasswordShown] = useState(false)
 
     const { currentUser } = useContext(AuthContext);
 
-console.log(currentUser)
 
     const [rightPanelActive, setRightPanelActive] = useState(false)
 
