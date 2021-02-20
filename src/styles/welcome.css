@@ -1,0 +1,58 @@
+.header {
+  width: 100%;
+  background: #cc5350;
+  color: #fff;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.logout {
+  border: 0;
+  border-radius: 0.5rem;
+  background-color: #1f23351c;
+  cursor: pointer;
+  display: block;
+  font-family: "Quicksand", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  outline: none;
+  perspective: 100px;
+  position: relative;
+  text-align: left;
+  width: 130px;
+  align-items: center;
+  -webkit-tap-highlight-color: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 3rem;
+  transition: all 150ms ease-in-out;
+}
+
+.logout:hover {
+  box-shadow: 0 0 10px 0 blue inset, 0 0 3px 1px blue;
+  color: #fff;
+}
+
+.header-user {
+  font-size: 1.5rem;
+}
+
+@media (max-width: 570px) {
+  .header {
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .logout {
+    width: 80px;
+    height: 35px;
+  }
+
+  .header-user-card {
+    margin-top: 1rem;
+  }
+}

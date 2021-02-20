@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { EnterPost } from '../Componants/EnterPost';
 import { Posts } from '../Componants/Posts';
+import { SinglePost } from '../Componants/SinglePost';
 import { Welcome } from '../Componants/Welcome';
 import { AuthContext } from '../Contaxts/AuthContext';
 import { LogIn } from './LogIn'
@@ -11,13 +12,15 @@ export const HomePage = () => {
     if (currentUser) {
 
         return (
-            <div className="home-container">
+            <>
                 <Welcome />
-                <div className="post-main-container">
-                    <EnterPost />
-                    <Posts />
+                <div className="home-container">
+                    <div className="post-main-container">
+                        <EnterPost />
+                        <Posts />
+                    </div>
                 </div>
-            </div>
+            </>
         )
     }
     return (

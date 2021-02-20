@@ -120,8 +120,9 @@
 }
 
 .feed-main-container {
-  display: flex;
-  flex-direction: column-reverse;
+  padding: 1rem;
+  background: whitesmoke;
+  margin: 0 auto;
 }
 
 .post-comment-container {

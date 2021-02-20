@@ -20,11 +20,14 @@ export const AddComment = ({ id, comments, setOpenComment }) => {
     }
 
 
-    
+
     return (
-        <div>
-            <input type="text" value={commentText} onChange={(e) => { setCommentText(e.target.value) }} />
-            <button onClick={updateComment} className="btn-primary">comment</button>
-        </div>
+        <div className="u-flex comments-container justify-flex">
+
+
+
+            <textarea type="text" class="input  comment-textarea" placeholder="Write a comment" v-model="newItem" value={commentText} onChange={(e) => { setCommentText(e.target.value) }}></textarea>
+            <button onClick={updateComment} class='primaryContained' type="submit">Add</button>
+        </div >
     )
 }

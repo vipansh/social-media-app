@@ -1,23 +1,30 @@
 import React from 'react'
+import '../styles/welcome.css'
+
 import { auth } from '../Firebase/Fire'
-import { BsFillEyeFill } from 'react-icons/bs';
 import { FaBeer } from 'react-icons/fa';
+import { AuthContext } from '../Contaxts/AuthContext';
 
 
 export const Welcome = () => {
 
-
+    const { currentUser } = React.useContext(AuthContext);
     return (
 
 
-        <div>
-            {BsFillEyeFill}
-            <h3> Lets go for a <FaBeer />? </h3>
-            welcome
-            <span onClick={() => auth.signOut()}>Log Out</span>
+        <div class="header">
+
+            <div> Lets go for a <FaBeer />?
+
+            </div>
+            <div className="header-user-card">
+
+                <span>Welcome <span className="header-user"> {currentUser.email.replace("@gmail.com", "")}</span>     </span>
+                <span></span>
+                <button class="logout" onClick={() => auth.signOut()}>Log Out</button>
+            </div>
         </div>
     )
 }
-
 
 

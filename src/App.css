@@ -3,7 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+body {
+  background: whitesmoke;
+}
 .home-container {
   margin: 0 auto;
   width: 80%;
@@ -25,7 +27,6 @@
 .post-main-container {
   width: 80%;
   margin: 1rem auto;
-  padding: 2rem;
 }
 .dlt-btn {
   padding: 0.5rem;

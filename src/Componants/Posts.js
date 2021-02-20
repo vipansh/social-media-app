@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect, useContext } from 'react'
 import { AuthContext } from '../Contaxts/AuthContext';
 import { firestore } from '../Firebase/Fire';
-import { InPost } from './InPost';
+import { SinglePost } from './SinglePost';
 
 
 
@@ -18,22 +18,20 @@ export const Posts = () => {
             let allpost = (snapshot.docs.map(doc => ({
                 id: doc.id, post: doc.data()
             })))
-            console.log(allpost)
 
-            allpost.sort((a, b) => { return a.post.timestamp - b.post.timestamp })
+            allpost.sort((a, b) => { return b.post.timestamp - a.post.timestamp })
 
             setfeed(allpost)
         })
 
 
     }, []);
-    console.log(feed)
 
     return (
 
         <div className="feed-main-container">
             {feed
-                ? feed.map((data, index) => <div><InPost data={data} key={index} /> </div>)
+                ? feed.map((data, index) => <div><SinglePost data={data} key={index} /> </div>)
                 : 'nothing'}
         </div>
     )

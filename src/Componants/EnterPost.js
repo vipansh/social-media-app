@@ -3,7 +3,7 @@ import { AuthContext } from '../Contaxts/AuthContext';
 import { storage } from '../Firebase/Fire'
 import { firestore } from '../Firebase/Fire'
 import firebase from 'firebase'
-import { FcAddImage } from 'react-icons/fc';
+import { FcCameraIdentification } from 'react-icons/fc';
 import { FaPencilAlt } from 'react-icons/fa';
 
 
@@ -100,14 +100,12 @@ export const EnterPost = () => {
             {image ? <div className="img-in-post"><img src={URL.createObjectURL(image)} className="img-in-post-img" alt="img" /></div> : ""}
             <div className="custom-file-input">
 
-                <label for="imgfile" className="upload-img-label btn-first">upload Img <span className="upload-img-icon"><FcAddImage className="upload-img-icon" style={{ marginLeft: "5px" }} /></span></label>
+                <label for="imgfile" className="upload-img-label btn-first">upload Img <span className="upload-img-icon"><FcCameraIdentification className="upload-img-icon" style={{ marginLeft: "5px" }} /></span></label>
                 <input id="imgfile" type="file" onChange={handelChange} />
                 <button onClick={postThis} className="post-btn btn-first"
                     disabled={disableBtn}
                 >{disableBtn ? "posting..." : "post"}</button>
             </div>
-
-
 
         </div>
     )
