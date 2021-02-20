@@ -20,6 +20,7 @@ export const SinglePost = ({ data }) => {
     const [hasLiked, setHasLiked] = useState(data.post.like ? data.post.like.includes(currentUser.uid) : false)
     const [alreadyLike, setAlreadyLike] = useState(data.post.like ? data.post.like : [])
 
+
     useEffect(() => {
         if (currentUser.email === data.post.user) {
             setcanDelete(true)
@@ -28,7 +29,10 @@ export const SinglePost = ({ data }) => {
             setcanDelete(false)
         }
 
+
     }, [currentUser.email, data])
+
+
 
     const deletePost = () => {
         if (data.post.postimgUrl) {
@@ -92,7 +96,7 @@ export const SinglePost = ({ data }) => {
                     <div class="user-and-group u-flex">
                         <span style={{ color: "blue" }}>{data.post.user.replace("@gmail.com", "")} </span>
                     </div>
-                    <div class="time-and-privacy"><time datetime="">October 14 at 1:51 PM</time><span class="icon icon-privacy">🌎</span></div>
+                    <div class="time-and-privacy">Today<span class="icon icon-privacy">🌎</span></div>
                 </div>
                 {canDelete ? <span onClick={deletePost} className=" u-margin-inline-start action-dlt-btn" ><MdDelete className="dlt-icon" /></span> : ""}
 
