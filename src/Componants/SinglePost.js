@@ -53,7 +53,6 @@ export const SinglePost = ({ data }) => {
         else if (dif >= t_second) fuzzy_string(t_second, "second");
         else res = "now";
 
-        console.log(millisec)
         return res;
     };
     useEffect(() => {
@@ -64,7 +63,6 @@ export const SinglePost = ({ data }) => {
             setcanDelete(false)
         }
 
-        console.log(data.post.timestamp)
 
 
     }, [currentUser.email, data])
