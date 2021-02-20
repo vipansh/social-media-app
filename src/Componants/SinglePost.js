@@ -20,7 +20,42 @@ export const SinglePost = ({ data }) => {
     const [hasLiked, setHasLiked] = useState(data.post.like ? data.post.like.includes(currentUser.uid) : false)
     const [alreadyLike, setAlreadyLike] = useState(data.post.like ? data.post.like : [])
 
+    const getFuzzyTime = (nanosec) => {
 
+        var millisec = (nanosec * 1000)
+
+        let res = "";
+
+        const t_second = 1000;
+        const t_minute = t_second * 60;
+        const t_hour = t_minute * 60;
+        const t_day = t_hour * 24;
+        const t_week = t_day * 7;
+        const t_month = Math.floor(t_day * 30.4);
+        const t_year = t_month * 12;
+
+        const now = Date.now();
+        const dif = now - millisec;
+
+        const fuzzy_string = (time_ref, time_str) => {
+            const fuzzy = Math.floor(dif / time_ref);
+
+            res += `${fuzzy} ${time_str}`;
+            if (fuzzy !== 1) res += "s";
+            res += " ago";
+        };
+        if (dif >= t_year) fuzzy_string(t_year, "year");
+        else if (dif >= t_month) fuzzy_string(t_month, "month");
+        else if (dif >= t_week) fuzzy_string(t_week, "week");
+        else if (dif >= t_day) fuzzy_string(t_day, "day");
+        else if (dif >= t_hour) fuzzy_string(t_hour, "hour");
+        else if (dif >= t_minute) fuzzy_string(t_minute, "minute");
+        else if (dif >= t_second) fuzzy_string(t_second, "second");
+        else res = "now";
+
+        console.log(millisec)
+        return res;
+    };
     useEffect(() => {
         if (currentUser.email === data.post.user) {
             setcanDelete(true)
@@ -28,6 +63,8 @@ export const SinglePost = ({ data }) => {
         else {
             setcanDelete(false)
         }
+
+        console.log(data.post.timestamp)
 
 
     }, [currentUser.email, data])
@@ -96,7 +133,7 @@ export const SinglePost = ({ data }) => {
                     <div class="user-and-group u-flex">
                         <span style={{ color: "blue" }}>{data.post.user.replace("@gmail.com", "")} </span>
                     </div>
-                    <div class="time-and-privacy">Today<span class="icon icon-privacy">🌎</span></div>
+                    <div class="time-and-privacy">{data.post.timestamp ? getFuzzyTime(data.post.timestamp.seconds) : "now"}<span class="icon icon-privacy">🌎</span></div>
                 </div>
                 {canDelete ? <span onClick={deletePost} className=" u-margin-inline-start action-dlt-btn" ><MdDelete className="dlt-icon" /></span> : ""}
 
