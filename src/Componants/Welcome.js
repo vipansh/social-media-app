@@ -12,16 +12,15 @@ export const Welcome = () => {
     return (
 
 
-        <div class="header">
+        <div className="header">
 
-            <div> Lets go for a <FaBeer />?
+            <div className="header-container">
+                <div className="header-title"> Lets go for a <FaBeer />?</div>
+                <div className="header-user-box">
 
-            </div>
-            <div className="header-user-card">
-
-                <span>Welcome <span className="header-user"> {currentUser.email.replace("@gmail.com", "")}</span>     </span>
-                <span></span>
-                <button class="logout" onClick={() => auth.signOut()}>Log Out</button>
+                    <div>  <span>Welcome <div className="header-user"> {currentUser.email.replace("@gmail.com", "")}</div>     </span></div>
+                    <div class="logout" onClick={() => auth.signOut()}>Log Out</div>
+                </div>
             </div>
         </div>
     )

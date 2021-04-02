@@ -2,57 +2,90 @@
   width: 100%;
   background: #cc5350;
   color: #fff;
-  height: 200px;
+  height: 150px;
+}
+
+.header-container {
+  width: 80%;
+  padding: 2rem;
+  margin: 0 auto;
+}
+
+.header-user-box {
   display: flex;
+  margin: 1rem auto;
+  justify-content: space-between;
   align-items: center;
-  justify-content: space-around;
-}
-
-.logout {
-  border: 0;
-  border-radius: 0.5rem;
-  background-color: #1f23351c;
-  cursor: pointer;
-  display: block;
-  font-family: "Quicksand", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  height: 40px;
-  outline: none;
-  perspective: 100px;
-  position: relative;
-  text-align: left;
-  width: 130px;
-  align-items: center;
-  -webkit-tap-highlight-color: transparent;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 3rem;
-  transition: all 150ms ease-in-out;
-}
-
-.logout:hover {
-  box-shadow: 0 0 10px 0 blue inset, 0 0 3px 1px blue;
-  color: #fff;
 }
 
 .header-user {
-  font-size: 1.5rem;
+  display: inline-block;
+  margin: 20px;
+  padding: 0 10px 0 10px;
+
+  border: none;
+  border-radius: 10px;
+
+  color: #fff;
+  list-style-type: none;
+  text-align: center;
+  text-shadow: 0 -1px 0 hsl(0, 0%, 0%);
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 44px;
+}
+.logout {
+  box-sizing: border-box;
+  cursor: pointer;
+  width: 300px;
+  height: 44px;
+  border: none;
+  border-radius: 10px;
+  background-color: hsl(0, 92%, 38%);
+  background-image: linear-gradient(
+    top,
+    hsl(0, 92%, 58%) 0%,
+    hsl(0, 92%, 43%) 40%,
+    hsl(0, 92%, 38%) 80%,
+    hsl(0, 92%, 46%) 100%
+  );
+  box-shadow: inset 0 1px 1px hsla(0, 0%, 100%, 0.2),
+    0 1px 2px hsla(0, 0%, 0%, 0.8), 0 1px 0 4px hsla(0, 0%, 100%, 0.15),
+    0 0 0 1px hsla(220, 8%, 10%, 0.8);
+  color: #fff;
+  list-style-type: none;
+  text-align: center;
+  text-shadow: 0 -1px 0 hsl(0, 0%, 0%);
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 44px;
 }
 
-@media (max-width: 570px) {
-  .header {
-    justify-content: center;
-    flex-direction: column;
+@media only screen and (max-width: 600px) {
+  .header-container {
+    width: 100%;
+    padding: 0rem;
+    margin: 0 auto;
   }
 
   .logout {
-    width: 80px;
-    height: 35px;
+    width: auto;
+    height: 44px;
+    font-size: 14px;
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
   }
-
-  .header-user-card {
-    margin-top: 1rem;
+  .header-user-box {
+    display: flex;
+    margin: 0rem auto;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .header-title {
+    align-items: center;
+    justify-content: center;
+    display: flex;
   }
 }
