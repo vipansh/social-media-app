@@ -78,3 +78,7 @@ body {
     width: 98%;
   }
 }
+
+button {
+  outline: none;
+}
